@@ -45,18 +45,30 @@ module.exports = {
     },
 
     async subtractFromWallet(userId, amount) {
+        const user = await User.findOne({ userId });
+        
+        if (!user || user.wallet < amount) {
+            throw new Error('Insufficient wallet balance');
+        }
+        
         return await User.findOneAndUpdate(
             { userId },
             { $inc: { wallet: -amount } },
-            { new: true, upsert: true }
+            { new: true }
         );
     },
 
     async subtractFromBank(userId, amount) {
+        const user = await User.findOne({ userId });
+        
+        if (!user || user.bank < amount) {
+            throw new Error('Insufficient bank balance');
+        }
+        
         return await User.findOneAndUpdate(
             { userId },
             { $inc: { bank: -amount } },
-            { new: true, upsert: true }
+            { new: true }
         );
     },
 
