@@ -7,13 +7,16 @@ module.exports = {
         .setDescription('Check your balance'),
     async run({ interaction }) {
         try {
-            const balance = await dbUtils.getBalance(interaction.user.id);
+            const wallet = await dbUtils.getWallet(interaction.user.id);
+            const bank = await dbUtils.getBank(interaction.user.id);
+            const netWorth = wallet + bank;
 
             const balanceEmbed = new EmbedBuilder()
                 .setTitle(`${interaction.user.username}'s balance`)
                 .addFields(
-                    { name: 'Wallet', value: `\`${balance} 🪙\``, inline: true },
-                    { name: 'Bank', value: `\`0 🪙\``, inline: true }
+                    { name: 'Wallet', value: `\`${wallet} 🪙\``, inline: true },
+                    { name: 'Bank', value: `\`${bank} 🪙\``, inline: true },
+                    { name: 'Net Worth', value: `\`${netWorth} 🪙\``, inline: true }
                 )
                 .setColor(0x36393F)
                 .setThumbnail(interaction.user.displayAvatarURL({ size: 256 }))
