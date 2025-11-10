@@ -26,9 +26,7 @@
     "fs-extra": "^11.3.0",
     "glob": "^8.1.0",
     "mongoose": "^7.8.7",
-    "node-superfetch": "^0.3.4",
-    "ollama": "^0.5.16",
-    "uuid": "^11.1.0"
+    "node-superfetch": "^0.3.4"
   },
   "devDependencies": {
     "eslint": "^8.57.1",
