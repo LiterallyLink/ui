@@ -82,10 +82,16 @@ module.exports = class Util {
 			const whitelistedGuildIds = JSON.parse(process.env.WHITELISTED_GUILD_IDS || '[]');
 			
 			if (whitelistedGuildIds.length > 0) {
+				await rest.put(Routes.applicationCommands(client_id), { body: [] });
+				
 				for (const guildId of whitelistedGuildIds) {
 					await rest.put(Routes.applicationGuildCommands(client_id, guildId), { body: slashCommandArray });
 				}
 			} else {
+				for (const guildId of whitelistedGuildIds) {
+					await rest.put(Routes.applicationGuildCommands(client_id, guildId), { body: [] });
+				}
+				
 				await rest.put(Routes.applicationCommands(client_id), { body: slashCommandArray });
 			}
 		} catch (error) {
@@ -93,7 +99,7 @@ module.exports = class Util {
 		}
 	
 		return console.log(`[Registered] :: ${slashCommandArray.length} Slashcommands.`);
-	};
+	}
 
 	async clearSlashCommands() {
 		const rest = new REST({ version: '9' }).setToken(bot_token);
