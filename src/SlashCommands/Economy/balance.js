@@ -10,12 +10,15 @@ module.exports = {
             const balance = await dbUtils.getBalance(interaction.user.id);
 
             const balanceEmbed = new EmbedBuilder()
-                .setTitle(`${interaction.user.username}'s Balance`)
-                .setDescription(`💰 **${balance}**`)
-                .setColor('#5b5c6e')
-                .setTimestamp()
+                .setTitle(`${interaction.user.username}'s balance`)
+                .addFields(
+                    { name: 'Wallet', value: `\`${balance} 🪙\``, inline: true },
+                    { name: 'Bank', value: `\`0 🪙\``, inline: true }
+                )
+                .setColor(0x36393F)
+                .setThumbnail(interaction.user.displayAvatarURL({ size: 256 }))
                 .setFooter({
-                    text: interaction.user.username,
+                    text: `Requested by ${interaction.user.displayName}`,
                     iconURL: interaction.user.displayAvatarURL()
                 });
 
