@@ -17,7 +17,7 @@ class MusicService {
             this.client.events.get('playerEmptyQueue').run(queue);
         });
 
-        console.log("Player events registered successfully.");
+        console.log("[Player] :: Successfully launched");
     }
 }
 
