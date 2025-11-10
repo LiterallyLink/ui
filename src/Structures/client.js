@@ -6,7 +6,7 @@ require('dotenv').config();
 const { bot_token } = process.env;
 
 const Util = require('./Utilities/Util');
-const Database = require('./Utilities/Database.js');
+const Database = require('./Database/Database.js');
 const Canvas = require('./Utilities/Canvas.js');
 const MusicService = require('../Structures/Utilities/Music/MusicService.js');
 
