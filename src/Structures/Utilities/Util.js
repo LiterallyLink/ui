@@ -5,7 +5,7 @@ const { promisify } = require('util');
 const glob = promisify(require('glob'));
 
 require('dotenv').config();
-const { bot_token, clientId, guildId } = process.env;
+const { bot_token, client_id, guild_id } = process.env;
 
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
@@ -79,26 +79,26 @@ module.exports = class Util {
 
 	async registerSlashCommands(rest, slashCommandArray) {
 		try {
-			if (guildId) {
-				await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: slashCommandArray });
+			if (guild_id) {
+				await rest.put(Routes.applicationGuildCommands(client_id, guild_id), { body: slashCommandArray });
 			} else {
-				await rest.put(Routes.applicationCommands(clientId), { body: slashCommandArray });
+				await rest.put(Routes.applicationCommands(client_id), { body: slashCommandArray });
 			}
 		} catch (error) {
 			if (error) return console.error(error);
 		}
 
-		return console.log(`Registered ${slashCommandArray.length} Slashcommands.`);
+		return console.log(`[Registered] :: ${slashCommandArray.length} Slashcommands.`);
 	};
 
 	async clearSlashCommands() {
 		const rest = new REST({ version: '9' }).setToken(bot_token);
 
-		rest.get(Routes.applicationCommands(clientId)).then(data => {
+		rest.get(Routes.applicationCommands(client_id)).then(data => {
 			const promises = [];
 
 			for (const command of data) {
-				const deleteUrl = `${Routes.applicationCommands(clientId)}/${command.id}`;
+				const deleteUrl = `${Routes.applicationCommands(client_id)}/${command.id}`;
 				promises.push(rest.delete(deleteUrl));
 			}
 
@@ -122,6 +122,6 @@ module.exports = class Util {
 			event.emitter[event.type](name, (...args) => event.run(...args));
 		}
 
-		return console.log(`Registered ${events.length} Events.`);
+		return console.log(`[Registered] :: ${events.length} DJS Events.`);
 	};
 };
