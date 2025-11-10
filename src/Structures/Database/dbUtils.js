@@ -1,35 +1,77 @@
 const User = require('./schemas/User');
 
 module.exports = {
-    async getBalance(userId) {
+    async getWallet(userId) {
         const user = await User.findOneAndUpdate(
             { userId },
-            { $setOnInsert: { balance: 0 } },
+            { $setOnInsert: { wallet: 0, bank: 0 } },
             { upsert: true, new: true }
         );
-        return user.balance;
+        return user.wallet;
     },
 
-    async addBalance(userId, amount) {
-        return await user.findOneAndUpdate(
+    async getBank(userId) {
+        const user = await User.findOneAndUpdate(
             { userId },
-            { $inc: { balance: amount } },
+            { $setOnInsert: { wallet: 0, bank: 0 } },
+            { upsert: true, new: true }
+        );
+        return user.bank;
+    },
+
+    async getNetWorth(userId) {
+        const user = await User.findOneAndUpdate(
+            { userId },
+            { $setOnInsert: { wallet: 0, bank: 0 } },
+            { upsert: true, new: true }
+        );
+        return user.wallet + user.bank;
+    },
+
+    async addToWallet(userId, amount) {
+        return await User.findOneAndUpdate(
+            { userId },
+            { $inc: { wallet: amount } },
             { new: true, upsert: true }
         );
     },
 
-    async subtractBalance(userId, amount) {
+    async addToBank(userId, amount) {
         return await User.findOneAndUpdate(
             { userId },
-            { $inc: { balance: -amount } },
+            { $inc: { bank: amount } },
             { new: true, upsert: true }
         );
     },
 
-    async setBalance(userId, amount) {
+    async subtractFromWallet(userId, amount) {
         return await User.findOneAndUpdate(
             { userId },
-            { $set: { balance: amount } },
+            { $inc: { wallet: -amount } },
+            { new: true, upsert: true }
+        );
+    },
+
+    async subtractFromBank(userId, amount) {
+        return await User.findOneAndUpdate(
+            { userId },
+            { $inc: { bank: -amount } },
+            { new: true, upsert: true }
+        );
+    },
+
+    async setWallet(userId, amount) {
+        return await User.findOneAndUpdate(
+            { userId },
+            { $set: { wallet: amount } },
+            { new: true, upsert: true }
+        );
+    },
+
+    async setBank(userId, amount) {
+        return await User.findOneAndUpdate(
+            { userId },
+            { $set: { bank: amount } },
             { new: true, upsert: true }
         );
     }

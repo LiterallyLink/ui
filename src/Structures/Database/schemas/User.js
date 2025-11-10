@@ -7,11 +7,20 @@ const UserSchema = new Schema({
         unique: true,
         index: true
     },
-    balance: {
+    wallet: {
         type: Number,
         default: 0,
         min: 0
     },
+    bank: {
+        type: Number,
+        default: 0,
+        min: 0
+    }
+});
+
+UserSchema.virtual('netWorth').get(function() {
+    return this.wallet + this.bank;
 });
 
 module.exports = model('User', UserSchema);
