@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('avatar')
-        .setDescription("Display someone's avatar")
+        .setDescription("Retrieve a user's avatar, either global or server-specific.")
         .addStringOption(option =>
             option.setName('type')
                 .setDescription('Choose between server or global avatar')
