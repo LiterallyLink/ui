@@ -5,7 +5,7 @@ const { promisify } = require('util');
 const glob = promisify(require('glob'));
 
 require('dotenv').config();
-const { token, clientId, guildId } = process.env;
+const { bot_token, clientId, guildId } = process.env;
 
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
@@ -72,7 +72,7 @@ module.exports = class Util {
 			this.client.slashCommands.set(command.data.name, command);
 		}
 
-		const rest = new REST({ version: '9' }).setToken(token);
+		const rest = new REST({ version: '9' }).setToken(bot_token);
 
 		await this.registerSlashCommands(rest, slashCommandArray);
 	};
@@ -92,7 +92,7 @@ module.exports = class Util {
 	};
 
 	async clearSlashCommands() {
-		const rest = new REST({ version: '9' }).setToken(token);
+		const rest = new REST({ version: '9' }).setToken(bot_token);
 
 		rest.get(Routes.applicationCommands(clientId)).then(data => {
 			const promises = [];

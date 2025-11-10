@@ -3,7 +3,7 @@ const { Player } = require('discord-player');
 const { SpotifyExtractor } = require('@discord-player/extractor');
 require('dotenv').config();
 
-const { token } = process.env;
+const { bot_token } = process.env;
 
 const Util = require('./Utilities/Util');
 const Canvas = require('./Utilities/Canvas.js');
@@ -49,7 +49,7 @@ module.exports = class uiClient extends Client {
 		try {
 			await this.utils.loadSlashCommands();
 			this.utils.loadEvents();
-			await super.login(token);
+			await super.login(bot_token);
 		} catch (err) {
             console.error('[Client] :: Initialization failed', err);
             process.exit(1);
