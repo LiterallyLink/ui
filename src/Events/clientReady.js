@@ -10,13 +10,13 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		console.log("Initializing Bot.");
+		console.log("[Client] :: Successfully logged in as " + this.client.user.tag);
 		
 		try {
 			await this.client.player.extractors.register(YoutubeiExtractor, {});
-			console.log("YouTube extractor registered successfully.");
+			console.log("[Extractor] :: YouTube extractor registered successfully.");
 		} catch (error) {
-			console.error("Failed to register YouTube extractor:", error);
+			console.error("[Extractor] :: Failed to register YouTube extractor:", error);
 		}
 	}
 
