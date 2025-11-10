@@ -23,6 +23,7 @@ module.exports = class extends Event {
 					});
 				} else if (option.value) { args.push(option.value); }
 			}
+			
 			interaction.member = interaction.guild.members.cache.get(interaction.user.id);
 
 			return cmd.run({ client: this.client, interaction, arguments: args });
