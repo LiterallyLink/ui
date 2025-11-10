@@ -1,0 +1,37 @@
+{
+  "name": "ui",
+  "version": "1.0.0",
+  "description": "So many people...and they're all staring at me...",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Charmed",
+  "license": "ISC",
+  "dependencies": {
+    "@discord-player/extractor": "^7.1.0",
+    "@discordjs/builders": "^1.10.1",
+    "@discordjs/opus": "^0.10.0",
+    "@discordjs/rest": "^1.7.1",
+    "@discordjs/voice": "^0.18.0",
+    "axios": "^1.10.0",
+    "canvas": "^3.1.0",
+    "cheerio": "^1.0.0",
+    "discord-api-types": "^0.37.119",
+    "discord-player": "^7.1.0",
+    "discord-player-youtubei": "^1.5.0",
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.4.7",
+    "ffmpeg-static": "^5.2.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^8.1.0",
+    "mongoose": "^7.8.6",
+    "node-superfetch": "^0.3.4",
+    "ollama": "^0.5.16",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-tesseract": "^0.3.0"
+  }
+}
