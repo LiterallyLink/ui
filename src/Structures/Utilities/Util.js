@@ -79,15 +79,19 @@ module.exports = class Util {
 
 	async registerSlashCommands(rest, slashCommandArray) {
 		try {
-			if (guild_id) {
-				await rest.put(Routes.applicationGuildCommands(client_id, guild_id), { body: slashCommandArray });
+			const whitelistedGuildIds = JSON.parse(process.env.WHITELISTED_GUILD_IDS || '[]');
+			
+			if (whitelistedGuildIds.length > 0) {
+				for (const guildId of whitelistedGuildIds) {
+					await rest.put(Routes.applicationGuildCommands(client_id, guildId), { body: slashCommandArray });
+				}
 			} else {
 				await rest.put(Routes.applicationCommands(client_id), { body: slashCommandArray });
 			}
 		} catch (error) {
 			if (error) return console.error(error);
 		}
-
+	
 		return console.log(`[Registered] :: ${slashCommandArray.length} Slashcommands.`);
 	};
 
